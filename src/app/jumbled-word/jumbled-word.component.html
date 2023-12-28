@@ -1,0 +1,57 @@
+<div [ngClass]="{ fadeOut: message !== '' }">
+  <app-alert
+    class="top"
+    *ngIf="message != ''"
+    [message]="message"
+    (retry)="retry($event)"
+  ></app-alert>
+  <div class="marginTop" *ngIf="start">
+    <div style="align-items: center;">
+      <input
+        class="input-box"
+        [cdkTrapFocusAutoCapture]="start"
+        [cdkTrapFocus]="start"
+        [(ngModel)]="answer"
+        (keyup)="compare()"
+        type="text"
+        placeholder="Type Here..."
+        autofocus
+        [disabled]="message !== ''"
+        [readonly]="message !== ''"
+      />
+      <div style="text-align:center">
+        <h4>
+          <span>Current Score:- {{ score }}</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span>Best Score: {{ personalBest }}</span>
+        </h4>
+        <h1>{{ time }}</h1>
+      </div>
+    </div>
+
+    <div class="center">
+      <span class="question">{{ questionToShow }}</span>
+    </div>
+  </div>
+  <div *ngIf="!start">
+    <p>
+      Jumbled is a game where you will see the word with its characters
+      scrambled and you have to type the correct word within given time limit.
+    </p>
+    <h3>How To Play?</h3>
+    <ul>
+      <li>You will see the jumbled word on the screen.</li>
+      <li>You have to enter the correct word in the given input box.</li>
+      <li>Time limit is {{ duration / 1000 }} seconds</li>
+      <li>You can use hints, if you use hints score will get reduced.</li>
+    </ul>
+    <div style="margin-top:10%; text-align:center">
+      <button *ngIf="!waiting" class="start-button" (click)="startGame()">
+        START
+      </button>
+      <div *ngIf="waiting" class="spinner">
+        <app-spinner></app-spinner>
+      </div>
+    </div>
+  </div>
+</div>

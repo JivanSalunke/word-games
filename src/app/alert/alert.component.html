@@ -1,0 +1,9 @@
+<div class="alert-wrap">
+  <div class="alert">
+    <div [innerHTML]="message"></div>
+    <footer>
+      <button class="secondary-btn" [routerLink]="['']">Go to Home</button>
+      <button class="primary-btn" (click)="tryAgain()">Try Again!!</button>
+    </footer>
+  </div>
+</div>
